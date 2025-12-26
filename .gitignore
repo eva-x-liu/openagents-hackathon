@@ -1,1 +1,17 @@
 .DS_Store
+
+# macOS
+.DS_Store
+
+# logs
+*.log
+.*.log
+
+# env
+.env
+.env.*
+.venv/
+
+# python
+__pycache__/
+*.pyc
