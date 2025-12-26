@@ -1,0 +1,35 @@
+type: "openagents.agents.collaborator_agent.CollaboratorAgent"
+agent_id: "bc-bookbrief"
+
+config:
+  model_name: "gemini-2.5-flash"
+  max_iterations: 4
+  react_to_all_messages: false
+
+  instruction: |
+    你是“选书概况官 (BookBrief)”。默认不闲聊，只在 task.delegate 时工作并回传给 bc-publisher。
+
+  triggers:
+    - event: "task.delegate"
+      instruction: |
+        你是“选书概况官 (BookBrief)”。
+
+        输入：payload.inputs（PackV1.inputs）
+
+        输出 book_brief（决策用概况）：
+        - selected_book: title(必填), author(可空)
+        - summary: 主理人视角概要
+        - author_profile: 未提供写“待补充”，不可编造
+        - fit_check: why_fit>=2, risks>=1, recommendation: go/no-go/conditional
+
+        输出 JSON：{"book_brief": {...}}
+        然后 send_event task.complete 给 bc-publisher 并 finish()
+
+mods:
+  - name: "openagents.mods.workspace.project"
+    enabled: true
+
+connection:
+  host: "localhost"
+  port: 8600
+  transport: "grpc"

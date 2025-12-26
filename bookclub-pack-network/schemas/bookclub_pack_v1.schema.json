@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/bookclub_pack_v1.schema.json",
+  "title": "BookClub Product Pack v1 (1-21 days)",
+  "type": "object",
+  "required": ["meta", "inputs", "book_brief", "packs"],
+  "additionalProperties": true,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["project_name", "network_id", "version", "generated_at", "language"],
+      "additionalProperties": true,
+      "properties": {
+        "project_name": { "type": "string", "minLength": 1 },
+        "network_id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "const": "pack_v1" },
+        "generated_at": { "type": "string", "minLength": 1 },
+        "language": { "type": "string", "enum": ["zh", "en", "zh-CN", "en-US"] }
+      }
+    },
+
+    "inputs": {
+      "type": "object",
+      "required": [
+        "host_identity",
+        "target_audience",
+        "core_problem",
+        "book_source_mode",
+        "format",
+        "is_online",
+        "cycle_days",
+        "tone",
+        "conversion"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "host_identity": { "type": "string", "minLength": 1 },
+        "target_audience": { "type": "string", "minLength": 1 },
+        "core_problem": { "type": "string", "minLength": 1 },
+
+        "book_source_mode": { "type": "string", "enum": ["provided", "recommend"] },
+        "books_provided": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "required": ["title"],
+            "additionalProperties": true,
+            "properties": {
+              "title": { "type": "string", "minLength": 1 },
+              "author": { "type": "string" },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+
+        "format": { "type": "string", "enum": ["text", "live", "hybrid"] },
+        "is_online": { "type": "boolean" },
+
+        "cycle_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 21,
+          "description": "User-defined number of days (1..21). Publisher MUST enforce daily arrays length == cycle_days."
+        },
+
+        "tone": {
+          "type": "string",
+          "enum": ["professional", "warm", "youthful", "serious", "light"]
+        },
+
+        "conversion": {
+          "type": "object",
+          "required": ["enabled"],
+          "additionalProperties": true,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "product_name": { "type": "string" },
+            "product_audience": { "type": "string" },
+            "product_claims": { "type": "array", "items": { "type": "string" } },
+            "constraints": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "book_brief": {
+      "type": "object",
+      "required": ["selected_book", "summary", "author_profile", "fit_check"],
+      "additionalProperties": true,
+      "properties": {
+        "selected_book": {
+          "type": "object",
+          "required": ["title"],
+          "additionalProperties": true,
+          "properties": {
+            "title": { "type": "string", "minLength": 1 },
+            "author": { "type": "string" }
+          }
+        },
+        "summary": { "type": "string", "minLength": 1 },
+        "author_profile": { "type": "string", "minLength": 1 },
+        "fit_check": {
+          "type": "object",
+          "required": ["why_fit", "risks", "recommendation"],
+          "additionalProperties": true,
+          "properties": {
+            "why_fit": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "risks": { "type": "array", "items": { "type": "string" } },
+            "recommendation": { "type": "string", "enum": ["go", "no-go", "conditional"] }
+          }
+        }
+      }
+    },
+
+    "packs": {
+      "type": "object",
+      "required": ["recruit_pack", "content_pack", "ops_pack", "conversion_pack"],
+      "additionalProperties": true,
+      "properties": {
+        "recruit_pack": {
+          "type": "object",
+          "required": ["enabled", "copywriting"],
+          "additionalProperties": true,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "copywriting": {
+              "type": "object",
+              "required": ["group_invite_post", "moments_post", "dm_script", "poster_text"],
+              "additionalProperties": true,
+              "properties": {
+                "group_invite_post": { "type": "string" },
+                "moments_post": { "type": "string" },
+                "dm_script": { "type": "string" },
+                "poster_text": { "type": "string" }
+              }
+            }
+          }
+        },
+
+        "content_pack": {
+          "type": "object",
+          "required": ["enabled", "daily_plan"],
+          "additionalProperties": true,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "daily_plan": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 21,
+              "items": {
+                "type": "object",
+                "required": ["day", "theme", "key_points", "deliverables"],
+                "additionalProperties": true,
+                "properties": {
+                  "day": { "type": "integer", "minimum": 1, "maximum": 21 },
+                  "theme": { "type": "string", "minLength": 1 },
+                  "key_points": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+                  "deliverables": {
+                    "type": "object",
+                    "required": ["text_post", "live_script", "ppt_outline"],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text_post": { "type": "string" },
+                      "live_script": { "type": "string" },
+                      "ppt_outline": { "type": "array", "items": { "type": "string" } }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+
+        "ops_pack": {
+          "type": "object",
+          "required": ["enabled", "pre_launch", "opening", "daily_ops", "closing"],
+          "additionalProperties": true,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "pre_launch": {
+              "type": "object",
+              "required": ["setup_checklist"],
+              "additionalProperties": true,
+              "properties": {
+                "setup_checklist": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+                "rehearsal_notes": { "type": "string" }
+              }
+            },
+            "opening": {
+              "type": "object",
+              "required": ["opening_host_script", "icebreakers"],
+              "additionalProperties": true,
+              "properties": {
+                "opening_host_script": { "type": "string" },
+                "icebreakers": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "daily_ops": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 21,
+              "items": {
+                "type": "object",
+                "required": ["day", "morning_8am_teaser", "daily_announcement", "homework", "reflection_prompt"],
+                "additionalProperties": true,
+                "properties": {
+                  "day": { "type": "integer", "minimum": 1, "maximum": 21 },
+                  "morning_8am_teaser": { "type": "string" },
+                  "daily_announcement": { "type": "string" },
+                  "homework": { "type": "string" },
+                  "reflection_prompt": { "type": "string" }
+                }
+              }
+            },
+            "closing": {
+              "type": "object",
+              "required": ["wrap_up_script", "follow_up_message"],
+              "additionalProperties": true,
+              "properties": {
+                "wrap_up_script": { "type": "string" },
+                "follow_up_message": { "type": "string" }
+              }
+            }
+          }
+        },
+
+        "conversion_pack": {
+          "type": "object",
+          "required": ["enabled", "strategy", "scripts"],
+          "additionalProperties": true,
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "strategy": {
+              "type": "object",
+              "required": ["hook_map", "pitch_moment_design"],
+              "additionalProperties": true,
+              "properties": {
+                "hook_map": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["day", "hook", "placement"],
+                    "additionalProperties": true,
+                    "properties": {
+                      "day": { "type": "integer", "minimum": 1, "maximum": 21 },
+                      "hook": { "type": "string" },
+                      "placement": { "type": "string" }
+                    }
+                  }
+                },
+                "pitch_moment_design": { "type": "string" }
+              }
+            },
+            "scripts": {
+              "type": "object",
+              "required": ["soft_pitch_lines", "hard_pitch_script", "objection_handling"],
+              "additionalProperties": true,
+              "properties": {
+                "soft_pitch_lines": { "type": "array", "items": { "type": "string" } },
+                "hard_pitch_script": { "type": "string" },
+                "objection_handling": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["objection", "response"],
+                    "additionalProperties": true,
+                    "properties": {
+                      "objection": { "type": "string" },
+                      "response": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

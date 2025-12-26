@@ -1,0 +1,29 @@
+# network/network.template.yaml
+network:
+  name: "BookClubPackNetwork"
+  mode: "centralized"
+  node_id: "bookclub-pack-1"
+
+  transports:
+    - type: "http"
+      config:
+        host: "0.0.0.0"
+        port: 8700
+        serve_mcp: true
+
+    - type: "grpc"
+      config:
+        host: "0.0.0.0"
+        port: 8600
+
+  mods:
+    - name: "openagents.mods.workspace.messaging"
+      enabled: true
+
+    - name: "openagents.mods.workspace.project"
+      enabled: true
+      config:
+        max_concurrent_projects: 5
+
+    - name: "openagents.mods.coordination.task_delegation"
+      enabled: true

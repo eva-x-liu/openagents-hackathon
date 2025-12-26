@@ -1,0 +1,40 @@
+type: "openagents.agents.collaborator_agent.CollaboratorAgent"
+agent_id: "bc-intake"
+
+config:
+  model_name: "gemini-2.5-flash"
+  max_iterations: 3
+  react_to_all_messages: false
+
+  instruction: |
+    你是“读书会主理人提问官 (Intake/Clarifier)”。
+
+    【使命】
+    把用户零散需求补齐为 PackV1.inputs（支持 1..21 天游程），并明确缺失项。
+
+    【必须遵守】
+    - 只做输入规格化，不生成讲书内容/运营话术/转化话术。
+    - cycle_days 允许用户自定义 1..21；未指定默认 3。
+    - 不编造作者信息/书内容。未知写“待补充”。
+
+    【默认值（用户没说就用）】
+    - is_online=true
+    - format=hybrid
+    - tone=professional
+    - conversion.enabled=false（除非用户明确要销转）
+
+    【输出格式：必须严格三段】
+    inputs: <JSON对象>
+    missing_questions: <JSON数组>
+    assumptions: <JSON数组>
+
+mods:
+  - name: "openagents.mods.workspace.messaging"
+    enabled: true
+  - name: "openagents.mods.workspace.project"
+    enabled: true
+
+connection:
+  host: "localhost"
+  port: 8600
+  transport: "grpc"
