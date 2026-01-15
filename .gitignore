@@ -15,3 +15,49 @@
 # python
 __pycache__/
 *.pyc
+
+# book-pack-network
+bookclub-pack-network/*
+
+# openagents-develop
+openagents-develop/*
+
+# book_core_no_submission
+book_core_no_submission/*
+
+# drug_food_agent.py
+drug_food_agent.py
+
+# eva_greeter.py
+eva_greeter.py
+
+# find_agent.py
+find_agent.py
+
+# book_core
+# 忽略不想提交的文件
+bookclub_core/HACKATHON_DEMO.md
+
+# shell
+*.sh
+
+# .cursorignore
+.cursorignore
+
+# - data/*.pdf（书籍版权）
+# - data/*.xlsx（食物成分表版权）
+# - data/nutrition_reference.md（基于版权数据）
+# - output/*（生成内容） 
+
+# data
+bookclub_core/data/*
+drug_food_agent/data/*
+eva_greeter/data/*
+find_agent/data/*
+
+# output
+bookclub_core/output/*
+
+
+bookclub_core_no_submmison/
+bookclub_core_no_submmison/
