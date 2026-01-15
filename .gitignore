@@ -61,3 +61,6 @@ bookclub_core/output/*
 
 bookclub_core_no_submmison/
 bookclub_core_no_submmison/
+
+# Office temp files
+~.docx
