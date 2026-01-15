@@ -1,0 +1,8 @@
+name: bookclub-network
+workspace:
+  default:
+    mods:
+      - name: workspace.default
+        config:
+          message_routing_enabled: true
+          custom_events_enabled: true

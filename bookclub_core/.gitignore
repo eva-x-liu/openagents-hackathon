@@ -1,0 +1,195 @@
+# ========================================
+# BookClub AI Agent - .gitignore
+# OpenAgents Hackathon 2025
+# ========================================
+
+# ==========================================
+# 🔐 敏感信息（最重要！绝对不能提交）
+# ==========================================
+.env
+.env.local
+.env.production
+.env.*.local
+*.key
+*.pem
+secrets/
+
+# ==========================================
+# 🐍 Python 环境与缓存
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 虚拟环境
+venv/
+ENV/
+env/
+.venv/
+bookclub_env/
+.conda/
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ==========================================
+# 📁 本地数据文件（版权保护）
+# ==========================================
+# 书籍 PDF 有版权，不提交
+data/*.pdf
+data/*.PDF
+
+# Excel 数据文件（中国食物成分表有版权）
+data/*.xlsx
+data/*.xls
+data/*.csv
+
+# 营养速查表（基于中国食物成分表整理，有版权）
+data/nutrition_reference.md
+
+# 以下文件可以提交（公开信息整理）：
+# - data/dietary_rules.md：基于《中国居民膳食指南2022》公开信息整理
+# - data/host_profile.yaml：示例配置文件
+
+# ==========================================
+# 📝 日志文件
+# ==========================================
+*.log
+*.pid
+.network.log
+.studio.log
+.publisher.log
+.network.pid
+.studio.pid
+intake.log
+content.log
+ops.log
+network.log
+openagents.log
+openagents_network.log
+network_restart.log
+
+# ==========================================
+# 📤 输出文件（全部忽略）
+# ==========================================
+# 所有生成的输出文件不提交
+output/
+output/*.md
+output/*.docx
+output/*.txt
+output/*.json
+
+# ==========================================
+# 🖥️ 操作系统文件
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ==========================================
+# 🛠️ 编辑器与 IDE
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Cursor
+.cursor/
+
+# ==========================================
+# 📦 依赖与包管理
+# ==========================================
+node_modules/
+package-lock.json
+yarn.lock
+
+# ==========================================
+# 🔧 临时文件
+# ==========================================
+*.tmp
+*.temp
+*.bak
+*.backup
+.cache/
+tmp/
+temp/
+
+# ==========================================
+# 📊 Jupyter Notebook
+# ==========================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ==========================================
+# 🐳 Docker（如果使用）
+# ==========================================
+# Dockerfile.local
+# docker-compose.override.yml
+
+# ==========================================
+# 🧪 测试相关
+# ==========================================
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# ==========================================
+# ✅ 需要提交的文件清单（参考）
+# ==========================================
+# 以下文件需要提交：
+# - README.md
+# - HACKATHON_DEMO.md
+# - QUICK_START.md
+# - SUBMISSION_CHECKLIST.md
+# - requirements.txt
+# - network.yaml
+# - agents/*.yaml
+# - src/**/*.py
+# - data/dietary_rules.md（公开信息整理）
+# - data/host_profile.yaml（示例配置）
+# - multi_start.sh
+# - stop.sh
+#
+# ❌ 不提交（版权保护）：
+# - data/*.pdf（书籍版权）
+# - data/*.xlsx（食物成分表版权）
+# - data/nutrition_reference.md（基于版权数据）
+# - output/*（生成内容）
