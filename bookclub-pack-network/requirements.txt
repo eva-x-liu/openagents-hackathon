@@ -1,6 +1,0 @@
-openagents
-supervisor
-jsonschema
-packaging
-requests
-openai
