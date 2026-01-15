@@ -25,7 +25,7 @@
 
 ## 🎬 Demo 演示
 
-📺 **[观看 3 分钟演示视频](https://youtube.com/xxx)**
+📺 **[观看 3 分钟演示视频](https://youtu.be/2UJ3wY9j3q4?si=HVKJx8SspFkXbH4N)**
 
 > 视频内容：完整流程演示，从需求输入到 2 万字输出
 
